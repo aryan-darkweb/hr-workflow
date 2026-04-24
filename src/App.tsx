@@ -17,7 +17,7 @@ export default function App() {
   const [simulationLogs, setSimulationLogs] = useState<{message: string}[]>([]);
   const [nodeCounter, setNodeCounter] = useState(0);
 
-  // Function to add new nodes to the canvas [cite: 74]
+  // Function to add new nodes to the canvas
   const addNode = (type: HRNodeType) => {
     const newNode: Node = {
       id: uuidv4(),
@@ -32,7 +32,6 @@ export default function App() {
     setNodeCounter(prev => prev + 1);
   };
 
-  // Update node data from the form panel [cite: 80, 103]
   const onUpdateNode = (id: string, newData: Partial<WorkflowNodeData>) => {
     setNodes((nds) =>
       nds.map((node) => {
@@ -46,7 +45,7 @@ export default function App() {
     setSelectedNode((curr) => curr ? { ...curr, data: { ...curr.data, ...newData } } : null);
   };
 
-  // Serialize and test the workflow [cite: 118-124]
+  // Serialize and test the workflow
   const handleSimulate = async () => {
     const workflowData = { nodes, edges };
     const results = await simulateWorkflow(workflowData);
@@ -55,7 +54,6 @@ export default function App() {
 
   return (
     <div className="flex h-screen w-screen flex-col">
-      {/* Header / Toolbar [cite: 174-175] */}
       <header className="flex items-center justify-between bg-white px-6 py-4 border-b">
         <h1 className="text-xl font-bold text-gray-800">HR Workflow Designer</h1>
         <div className="flex gap-2">
@@ -78,7 +76,7 @@ export default function App() {
       </header>
 
       <main className="flex flex-1 overflow-hidden">
-        {/* Workflow Canvas [cite: 65] */}
+        
         <div className="flex-1 relative">
           <WorkflowCanvas 
             nodes={nodes} 
@@ -89,7 +87,7 @@ export default function App() {
           />
         </div>
 
-        {/* Sidebar: Form or Simulation Logs [cite: 79, 118] */}
+        {/* Sidebar: Form or Simulation Logs*/}
         <aside className="w-80 border-l bg-white flex flex-col">
           {selectedNode ? (
             <NodeForm node={selectedNode} onUpdate={onUpdateNode} />

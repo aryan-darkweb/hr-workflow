@@ -28,9 +28,7 @@ export const simulateWorkflow = async (workflow: { nodes: Node[]; edges: Edge[] 
   // Simple path traversal simulation
   let currentNodeId = startNode.id;
   let step = 2;
-  // eslint-disable-next-line no-useless-assignment
   let message = "";
-  // eslint-disable-next-line no-useless-assignment
   let nodeStatus = "success";
 
   while (currentNodeId) {
@@ -46,7 +44,6 @@ export const simulateWorkflow = async (workflow: { nodes: Node[]; edges: Edge[] 
       break;
     }
 
-    // For simplicity, take the first outgoing edge
     const nextEdge = outgoingEdges[0];
     const nextNode = nodes.find(n => n.id === nextEdge.target);
 

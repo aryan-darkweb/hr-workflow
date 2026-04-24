@@ -18,10 +18,10 @@ import type {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-// Import your custom node component [cite: 66]
+// Import your custom node component
 import { BaseNode } from './Nodes/BaseNode';
 
-// Define the custom node types for React Flow [cite: 148]
+// Define the custom node types for React Flow
 const nodeTypes = {
   start: BaseNode,
   task: BaseNode,
@@ -30,7 +30,7 @@ const nodeTypes = {
   end: BaseNode,
 };
 
-// Define strict interfaces for props to ensure type safety [cite: 103, 134]
+// Define strict interfaces for props to ensure type safety
 interface CanvasProps {
   nodes: Node[];
   setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
@@ -39,9 +39,9 @@ interface CanvasProps {
   onSelectNode: (node: Node | null) => void;
 }
 
-/**
- * WorkflowCanvas Component
- * Manages the visual drag-and-drop area for the HR Workflow [cite: 65]
+/*
+ WorkflowCanvas Component
+ Manages the visual drag-and-drop area for the HR Workflow [cite: 65]
  */
 export const WorkflowCanvas: React.FC<CanvasProps> = ({ 
   nodes, 
@@ -51,19 +51,19 @@ export const WorkflowCanvas: React.FC<CanvasProps> = ({
   onSelectNode 
 }) => {
 
-  // Handle structural changes to nodes (dragging, selecting, deleting) [cite: 74, 77]
+  // Handle structural changes to nodes (dragging, selecting, deleting)
   const onNodesChange: OnNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
     [setNodes]
   );
   
-  // Handle structural changes to edges [cite: 75, 77]
+  // Handle structural changes to edges
   const onEdgesChange: OnEdgesChange = useCallback(
     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     [setEdges]
   );
 
-  // Handle new connections between nodes [cite: 75]
+  // Handle new connections between nodes
   const onConnect: OnConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
@@ -77,9 +77,7 @@ export const WorkflowCanvas: React.FC<CanvasProps> = ({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        // FIXED: Explicitly typed parameters to resolve ts(7006)
         onNodeClick={(_event: React.MouseEvent, node: Node) => onSelectNode(node)}
-        // Clears selection when clicking the empty canvas area
         onPaneClick={() => onSelectNode(null)}
         nodeTypes={nodeTypes}
         fitView

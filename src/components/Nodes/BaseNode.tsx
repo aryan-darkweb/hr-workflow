@@ -1,10 +1,8 @@
-// src/components/Nodes/BaseNode.tsx
 import { Handle, Position } from 'reactflow';
 import type { NodeProps} from 'reactflow';
 import type{ WorkflowNodeData } from '../../types/workflow';
 
 export const BaseNode = ({ data, selected, type }: NodeProps<WorkflowNodeData>) => {
-  // Use 'type' (start, task, etc.) to determine the color/styling [cite: 66-72]
   const colorMap = {
     start: 'border-green-500 bg-green-50',
     task: 'border-blue-500 bg-blue-50',
